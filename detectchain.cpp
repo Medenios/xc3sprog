@@ -76,7 +76,7 @@ int main(int argc, char **args)
     char const *dev   = 0;
     char const *serial  = 0;
     unsigned int jtag_freq = 0;
-    std::auto_ptr<IOBase>  io;
+    std::unique_ptr<IOBase>  io;
     int res;
     struct cable_t cable;
     

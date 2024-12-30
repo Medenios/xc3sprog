@@ -119,7 +119,7 @@ int main(int argc, char **args)
   char *devicedb = NULL;
   const char *cablename;
   DeviceDB db(devicedb);
-  std::auto_ptr<IOBase>  io;
+  std::unique_ptr<IOBase>  io;
   int res;
 
   gFuseName = 0;

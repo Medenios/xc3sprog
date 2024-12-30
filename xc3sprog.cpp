@@ -660,7 +660,7 @@ int main(int argc, char **args)
   char osname[OSNAME_LEN];
   DeviceDB db(NULL);
   CableDB cabledb(NULL);
-  std::auto_ptr<IOBase>  io;
+  std::unique_ptr<IOBase>  io;
   int res;
 
   get_os_name(osname, sizeof(osname));
@@ -1087,7 +1087,7 @@ int programXCF(Jtag &jtag, DeviceDB &db, int argc, char **args,
           fprintf(stderr, "Multiple positions only supported in case of XCF\n");
           usage(false);
         }
-      std::auto_ptr<ProgAlg> alg(makeProgAlg(jtag, id, xcfopts, true));
+      std::unique_ptr<ProgAlg> alg(makeProgAlg(jtag, id, xcfopts, true));
       total_size += alg->getSize();
     }
 
@@ -1096,7 +1096,7 @@ int programXCF(Jtag &jtag, DeviceDB &db, int argc, char **args,
       for (int k = 0; k < nchainpos; k++)
       {
           unsigned long id = get_id(jtag, db, chainpositions[k]);
-          std::auto_ptr<ProgAlg> alg(makeProgAlg(jtag, id, xcfopts, false));
+          std::unique_ptr<ProgAlg> alg(makeProgAlg(jtag, id, xcfopts, false));
           alg->erase();
       }
   }
@@ -1152,7 +1152,7 @@ int programXCF(Jtag &jtag, DeviceDB &db, int argc, char **args,
       for (int k = 0; k < nchainpos; k++)
       {
           unsigned long id = get_id(jtag, db, chainpositions[k]);
-          std::auto_ptr<ProgAlg> alg(makeProgAlg(jtag, id, xcfopts, false));
+          std::unique_ptr<ProgAlg> alg(makeProgAlg(jtag, id, xcfopts, false));
           BitFile tmp_bitfile;
           BitFile &cur_bitfile = (nchainpos == 1) ? promfile : tmp_bitfile;
           unsigned int current_promlen = alg->getSize() / 8;
@@ -1241,7 +1241,7 @@ int programXCF(Jtag &jtag, DeviceDB &db, int argc, char **args,
   if (reconfigure)
   {
       unsigned long id = get_id(jtag, db, chainpositions[0]);
-      std::auto_ptr<ProgAlg> alg(makeProgAlg(jtag, id, xcfopts, false));
+      std::unique_ptr<ProgAlg> alg(makeProgAlg(jtag, id, xcfopts, false));
       alg->reconfig();
   }
   return 0;

@@ -119,7 +119,7 @@ int main(int argc, char **args)
     byte odata[8];
     int chainpos =0;
     char *devicedb = NULL;
-    std::auto_ptr<IOBase>  io;
+    std::unique_ptr<IOBase>  io;
     DeviceDB db(devicedb);
     int res;
    
